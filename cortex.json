@@ -1,6 +1,6 @@
 {
   "name": "cortex-plugin-database-explorer",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Connect to PostgreSQL, MySQL, SQLite, MongoDB",
   "kind": "esm",
   "entryPoint": "mod.ts",
@@ -18,17 +18,44 @@
       "name": "db_connect",
       "description": "Connect to a database",
       "params": [
-        { "name": "connection_string", "type": "string", "description": "Database connection string (stored securely)", "required": true },
-        { "name": "db_type", "type": "string", "description": "Type of database", "required": true, "enum": ["postgresql", "mysql", "sqlite", "mongodb"] }
+        {
+          "name": "connection_string",
+          "type": "string",
+          "description": "Database connection string (stored securely)",
+          "required": true
+        },
+        {
+          "name": "db_type",
+          "type": "string",
+          "description": "Type of database",
+          "required": true,
+          "enum": ["postgresql", "mysql", "sqlite", "mongodb"]
+        }
       ]
     },
     {
       "name": "db_query",
       "description": "Execute a database query",
       "params": [
-        { "name": "query", "type": "string", "description": "SQL query or MongoDB aggregation", "required": true },
-        { "name": "params", "type": "string", "description": "JSON array of query parameters", "required": false },
-        { "name": "limit", "type": "number", "description": "Maximum rows to return", "required": false, "default": 100 }
+        {
+          "name": "query",
+          "type": "string",
+          "description": "SQL query or MongoDB aggregation",
+          "required": true
+        },
+        {
+          "name": "params",
+          "type": "string",
+          "description": "JSON array of query parameters",
+          "required": false
+        },
+        {
+          "name": "limit",
+          "type": "number",
+          "description": "Maximum rows to return",
+          "required": false,
+          "default": 100
+        }
       ]
     },
     {
@@ -40,23 +67,48 @@
       "name": "db_describe_table",
       "description": "Describe a table or collection schema",
       "params": [
-        { "name": "table_name", "type": "string", "description": "Name of the table or collection", "required": true }
+        {
+          "name": "table_name",
+          "type": "string",
+          "description": "Name of the table or collection",
+          "required": true
+        }
       ]
     },
     {
       "name": "db_generate_migration",
       "description": "Generate a database migration",
       "params": [
-        { "name": "description", "type": "string", "description": "Description of the migration", "required": true },
-        { "name": "from_schema", "type": "string", "description": "Source schema definition", "required": false },
-        { "name": "to_schema", "type": "string", "description": "Target schema definition", "required": false }
+        {
+          "name": "description",
+          "type": "string",
+          "description": "Description of the migration",
+          "required": true
+        },
+        {
+          "name": "from_schema",
+          "type": "string",
+          "description": "Source schema definition",
+          "required": false
+        },
+        {
+          "name": "to_schema",
+          "type": "string",
+          "description": "Target schema definition",
+          "required": false
+        }
       ]
     },
     {
       "name": "db_explain_query",
       "description": "Explain query execution plan",
       "params": [
-        { "name": "query", "type": "string", "description": "SQL query to explain", "required": true }
+        {
+          "name": "query",
+          "type": "string",
+          "description": "SQL query to explain",
+          "required": true
+        }
       ]
     }
   ],
@@ -67,13 +119,25 @@
   "settings": {
     "section": "Connection",
     "fields": [
-      { "key": "defaultDbType", "label": "Default DB Type", "type": "select", "description": "Default database type", "default": "postgresql", "options": [
-        { "label": "PostgreSQL", "value": "postgresql" },
-        { "label": "MySQL", "value": "mysql" },
-        { "label": "SQLite", "value": "sqlite" },
-        { "label": "MongoDB", "value": "mongodb" }
-      ] },
-      { "key": "defaultConnectionString", "label": "Default Connection String", "type": "secret", "description": "Default database connection string" }
+      {
+        "key": "defaultDbType",
+        "label": "Default DB Type",
+        "type": "select",
+        "description": "Default database type",
+        "default": "postgresql",
+        "options": [
+          { "label": "PostgreSQL", "value": "postgresql" },
+          { "label": "MySQL", "value": "mysql" },
+          { "label": "SQLite", "value": "sqlite" },
+          { "label": "MongoDB", "value": "mongodb" }
+        ]
+      },
+      {
+        "key": "defaultConnectionString",
+        "label": "Default Connection String",
+        "type": "secret",
+        "description": "Default database connection string"
+      }
     ]
   },
   "aiDisclosure": { "tools": ["Claude Code (Anthropic)"], "humanReview": true }
