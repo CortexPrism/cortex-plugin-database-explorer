@@ -4,6 +4,7 @@ let config: Record<string, string> = {};
 let currentConnection: { type: string; connectionString: string } | null = null;
 
 export async function onLoad(ctx: PluginContext): Promise<void> {
+  ctx.logger.info(`[cortex-plugin-database-explorer] Loaded`);
   config = await ctx.config.get() as Record<string, string>;
 }
 
