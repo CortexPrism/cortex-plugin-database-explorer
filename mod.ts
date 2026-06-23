@@ -1,4 +1,4 @@
-import type { PluginContext, Tool, ToolCallResult, ToolContext } from './types.ts';
+import type { PluginContext, Tool, ToolCallResult } from 'cortex/plugins';
 
 let config: Record<string, string> = {};
 let currentConnection: { type: string; connectionString: string } | null = null;
@@ -43,7 +43,7 @@ const db_connect: Tool = {
     ],
     capabilities: ['db:read'],
   },
-  execute: async (args: Record<string, unknown>, _ctx: ToolContext): Promise<ToolCallResult> => {
+  execute: async (args: Record<string, unknown>, _ctx: PluginContext): Promise<ToolCallResult> => {
     const start = Date.now();
     try {
       const connection_string = args.connection_string;
@@ -122,7 +122,7 @@ const db_query: Tool = {
     ],
     capabilities: ['db:read', 'shell:run'],
   },
-  execute: async (args: Record<string, unknown>, _ctx: ToolContext): Promise<ToolCallResult> => {
+  execute: async (args: Record<string, unknown>, _ctx: PluginContext): Promise<ToolCallResult> => {
     const start = Date.now();
     try {
       const query = args.query;
@@ -172,7 +172,7 @@ const db_list_tables: Tool = {
     params: [],
     capabilities: ['db:read', 'shell:run'],
   },
-  execute: async (_args: Record<string, unknown>, _ctx: ToolContext): Promise<ToolCallResult> => {
+  execute: async (_args: Record<string, unknown>, _ctx: PluginContext): Promise<ToolCallResult> => {
     const start = Date.now();
     try {
       const dbType = getDbType();
@@ -228,7 +228,7 @@ const db_describe_table: Tool = {
     ],
     capabilities: ['db:read', 'shell:run'],
   },
-  execute: async (args: Record<string, unknown>, _ctx: ToolContext): Promise<ToolCallResult> => {
+  execute: async (args: Record<string, unknown>, _ctx: PluginContext): Promise<ToolCallResult> => {
     const start = Date.now();
     try {
       const table_name = args.table_name;
@@ -305,7 +305,7 @@ const db_generate_migration: Tool = {
     ],
     capabilities: ['shell:run'],
   },
-  execute: async (args: Record<string, unknown>, _ctx: ToolContext): Promise<ToolCallResult> => {
+  execute: async (args: Record<string, unknown>, _ctx: PluginContext): Promise<ToolCallResult> => {
     const start = Date.now();
     try {
       const description = args.description;
@@ -362,7 +362,7 @@ const db_explain_query: Tool = {
     ],
     capabilities: ['db:read', 'shell:run'],
   },
-  execute: async (args: Record<string, unknown>, _ctx: ToolContext): Promise<ToolCallResult> => {
+  execute: async (args: Record<string, unknown>, _ctx: PluginContext): Promise<ToolCallResult> => {
     const start = Date.now();
     try {
       const query = args.query;
